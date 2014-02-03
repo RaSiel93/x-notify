@@ -1,0 +1,27 @@
+h1 Listing users
+
+table
+  tr
+    th Login
+    th Registration ID
+    th
+    th
+    th
+    th
+
+  - @users.each do |user|
+    tr
+      td = user.login
+      td = user.registration_id
+      td = link_to 'Send', send_user_path(user)
+      td = link_to 'Show', user
+      td = link_to 'Edit', edit_user_path(user)
+      td = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+br
+
+= link_to 'New User', new_user_path
+
+/ = form_tag("api/reg", method: "post") do
+/   = text_field_tag(:login, "rasiel")
+/   = text_area_tag(:registration_id, "111111111")
+/   = submit_tag("Send")

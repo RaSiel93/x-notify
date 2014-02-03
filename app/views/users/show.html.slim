@@ -1,0 +1,19 @@
+h1.page-header Просмотр пользователей
+p#notice = notice
+
+.panel.panel-default
+        .panel-heading
+                h3.panel-title Login:
+        .panel-body
+                = @user.login
+
+.panel.panel-default
+        .panel-heading
+                h3.panel-title Registration Id:
+        .panel-body
+                = @user.registration_id
+
+                
+= link_to 'Edit', edit_user_path(@user)
+br
+= link_to 'Back', users_path
