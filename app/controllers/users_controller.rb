@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_filter :find_user, :only => [:show, :edit, :update, :destroy, :show_send, :send_message]
 
+	skip_before_filter  :verify_authenticity_token
+
   @@gcm = GCM.new('AIzaSyDnEEoFJG1-K-QmV7qdkYyLHWIIqvJ5Of4')
 
   def index
@@ -92,7 +94,11 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:login, :registration_id)
+    if params[:user].nil?
+      {:login => params[:login], :registration_id => params[:registration_id]}
+    else
+      params.require(:user).permit(:login, :registration_id)
+    end
   end
 
   def find_user

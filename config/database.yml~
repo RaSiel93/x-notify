@@ -4,9 +4,9 @@ development:
   reconnect: false
   database: xnotifyc_development
   pool: 5
-  username: admin
-  password: password
-  socket: /var/run/mysqld/mysqld.sock
+  username: xnotifyc_rasiel
+  password: 184418
+  socket: /tmp/mysql.sock
 
 test:
   adapter: mysql2

@@ -1,0 +1,44 @@
+<h1>Listing items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Item type</th>
+      <th>Item</th>
+      <th>Discription</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><%= item.item_type %></td>
+        <td><%= item.item_id %></td>
+        <td><%= get_text item %></td>
+        <td><%= link_to 'Send', send_item_path(item), method: :post %></td>
+        <td><%= link_to 'Show', item %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<br>
+
+<%= link_to 'New Discount', new_discount_path %>
+
+<br>
+
+<%= link_to 'New Event', new_event_path %>
+
+<br>
+
+<%= link_to 'New Advertising', new_adv_path %>

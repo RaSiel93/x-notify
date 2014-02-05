@@ -1,0 +1,27 @@
+<h1>Listing advs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Discription</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @advs.each do |adv| %>
+      <tr>
+        <td><%= adv.discription %></td>
+        <td><%= link_to 'Show', adv %></td>
+        <td><%= link_to 'Edit', edit_adv_path(adv) %></td>
+        <td><%= link_to 'Destroy', adv, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Adv', new_adv_path %>
