@@ -1,12 +1,23 @@
 module ItemsHelper
-  def get_text item
-    case item.item_type
-    when 'Discount'
-      Discount.find_by_id( item.item_id ).discription
-    when 'Event'
-      Event.find_by_id( item.item_id ).discription
-    when 'Adv'
-      Adv.find_by_id( item.item_id ).discription
+  def item_show( item )
+    case item.content.class.to_s.downcase
+    when "adv" 
+      items_adv_path( item )
+    when "event" 
+      items_event_path( item )
+    when "discount" 
+      items_discount_path( item )
+    end
+  end
+  
+  def edit_item( item )
+    case item.content.class.to_s.downcase
+    when "adv" 
+      edit_items_adv_path( item )
+    when "event" 
+      edit_items_event_path( item )
+    when "discount" 
+      edit_items_discount_path( item )
     end
   end
 end
