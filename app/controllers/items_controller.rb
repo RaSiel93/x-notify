@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
     registration_ids = User.pluck(:registration_id)
     options = {data: {score: "#{@item.id}"}, collapse_key: "updated_score"}
     response = Google::CLOUD_MESSAGING.send_notification(registration_ids, options)
-    
+
     respond_to do |format|
       if response[:status_code] == 200
         format.html { redirect_to polymorphic_path([:items, @item.content]), notice: 'Message passed success' }

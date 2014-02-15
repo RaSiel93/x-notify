@@ -16,7 +16,7 @@ class Items::AdvertisingsController < ApplicationController
   def edit
   end
 
-  def create  
+  def create
     @advertising = Advertising.new(advertising_params)
     respond_to do |format|
       if @advertising.save

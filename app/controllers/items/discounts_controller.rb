@@ -16,7 +16,7 @@ class Items::DiscountsController < ApplicationController
   def edit
   end
 
-  def create  
+  def create
     @discount = Discount.new(discount_params)
     respond_to do |format|
       if @discount.save

@@ -16,7 +16,7 @@ class Items::EventsController < ApplicationController
   def edit
   end
 
-  def create  
+  def create
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
