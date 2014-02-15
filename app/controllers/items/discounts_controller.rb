@@ -56,6 +56,6 @@ class Items::DiscountsController < ApplicationController
   end
 
   def discount_params
-    params.require(:discount).permit(:description, item_attributes: [:title, :published])
+    params.require(:discount).permit(:description, :amount, item_attributes: [:title, :published])
   end
 end
