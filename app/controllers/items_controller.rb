@@ -19,6 +19,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    respond_to do |format|
+      format.html { redirect_to polymorphic_path([:items, @item.content]) + '.json', notice: 'Message passed success' }
+    end
+  end
+
   def destroy
     @item.destroy
     respond_to do |format|
