@@ -1,10 +1,10 @@
-<%= form_for [:items, @discount] do |f| %>
-  <% if @discount.errors.any? %>
+<%= form_for [:items, @advertising] do |f| %>
+  <% if @advertising.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@discount.errors.count, "error") %> prohibited this discount from being saved:</h2>
+      <h2><%= pluralize(@advertising.errors.count, "error") %> prohibited this advertising from being saved:</h2>
 
       <ul>
-      <% @discount.errors.full_messages.each do |msg| %>
+      <% @advertising.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140211201429) do
+ActiveRecord::Schema.define(version: 20140211202429) do
 
-  create_table "advs", force: true do |t|
+  create_table "advertisings", force: true do |t|
     t.string "description"
   end
 

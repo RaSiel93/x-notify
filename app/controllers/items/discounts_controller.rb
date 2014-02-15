@@ -1,34 +1,26 @@
 class Items::DiscountsController < ApplicationController
   before_action :set_discount, only: [:show, :edit, :update, :destroy]
 
-  # GET /discounts
-  # GET /discounts.json
   def index
-    @discounts = Discount.all
+    @discounts = Item.discounts.all
   end
 
-  # GET /discounts/1
-  # GET /discounts/1.json
   def show
   end
 
-  # GET /discounts/new
   def new
     @discount = Discount.new
+    @discount.build_item
   end
 
-  # GET /discounts/1/edit
   def edit
   end
 
-  # POST /discounts
-  # POST /discounts.json
-  def create
+  def create  
     @discount = Discount.new(discount_params)
-
     respond_to do |format|
-      if @discount.save && Item.create(item_type: @discount.class, item_id: @discount.id)
-        format.html { redirect_to @discount, notice: 'Discount was successfully created.' }
+      if @discount.save
+        format.html { redirect_to polymorphic_path([:items, @discount]), notice: 'discount was successfully created.' }
         format.json { render action: 'show', status: :created, location: @discount }
       else
         format.html { render action: 'new' }
@@ -37,12 +29,10 @@ class Items::DiscountsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /discounts/1
-  # PATCH/PUT /discounts/1.json
   def update
     respond_to do |format|
       if @discount.update(discount_params)
-        format.html { redirect_to @discount, notice: 'Discount was successfully updated.' }
+        format.html { redirect_to polymorphic_path([:items, @discount]), notice: 'discount was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -51,8 +41,6 @@ class Items::DiscountsController < ApplicationController
     end
   end
 
-  # DELETE /discounts/1
-  # DELETE /discounts/1.json
   def destroy
     @discount.destroy
     respond_to do |format|
@@ -62,13 +50,12 @@ class Items::DiscountsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_discount
-      @discount = Discount.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def discount_params
-      params.require(:discount).permit(:discription)
-    end
+  def set_discount
+    @discount = Discount.find(params[:id])
+  end
+
+  def discount_params
+    params.require(:discount).permit(:description, item_attributes: [:title, :published])
+  end
 end

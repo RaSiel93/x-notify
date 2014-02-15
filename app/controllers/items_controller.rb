@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   def show
     respond_to do |format|
       format.html { redirect_to polymorphic_path([:items, @item.content]) + '.json', notice: 'Message passed success' }
+      format.json { redirect_to polymorphic_path([:items, @item.content]) + '.json', notice: 'Message passed success' }
     end
   end
 

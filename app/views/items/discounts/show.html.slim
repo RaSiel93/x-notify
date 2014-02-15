@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong
+  | Title:
+  = @discount.item.title
+
+p
+  strong
+  | Description:
+  = @discount.description
+
+= link_to 'Edit', edit_items_discount_path(@discount) 
+= '|'
+= link_to 'Back', items_path
