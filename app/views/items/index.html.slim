@@ -7,35 +7,35 @@ table
       th Item type
       th Item
       th Title
-      th 
-      th 
-      th 
-      th 
+      th
+      th
+      th
+      th
 
   tbody
     - @items.each do |item|
       tr
-        td = item.id 
-        td = item.content_type 
-        td = item.content_id 
-        td = item.title 
-        td = link_to 'Send', send_item_path(item), method: :post 
-        td = link_to 'Show', polymorphic_path([:items, item.content])  
-        td = link_to 'Edit', edit_polymorphic_path([:items, item.content]) 
-        td = link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } 
-      
-br
-
-= link_to 'New Discount', new_items_discount_path 
+        td = item.id
+        td = item.content_type
+        td = item.content_id
+        td = item.title
+        td = link_to 'Send', send_item_path(item), method: :post
+        td = link_to 'Show', polymorphic_path([:items, item.content])
+        td = link_to 'Edit', edit_polymorphic_path([:items, item.content])
+        td = link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }
 
 br
 
-= link_to 'New Event', new_items_event_path 
+= link_to 'New Discount', new_items_discount_path
 
 br
 
-= link_to 'New Advertising', new_items_advertising_path 
+= link_to 'New Event', new_items_event_path
+
+br
+
+= link_to 'New Advertising', new_items_advertising_path
 
 hr
 
-= link_to 'View Users', users_path 
+= link_to 'View Users', users_path
