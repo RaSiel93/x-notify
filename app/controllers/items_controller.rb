@@ -8,16 +8,26 @@ class ItemsController < ApplicationController
   end
 
   def send_item_id
-    registration_ids = User.all.map{|i| i.registration_id}
+    registration_ids = User.pluck(:registration_id)
     options = {data: {score: "#{@item.id}"}, collapse_key: "updated_score"}
     response = @@gcm.send_notification(registration_ids, options)
+    
+    binding.pry
 
     respond_to do |format|
       if response[:status_code] == 200
-        format.html { redirect_to @item, notice: 'Message passed success' }
+        format.html { redirect_to polymorphic_path([:items, @item.content]), notice: 'Message passed success' }
       else
-        format.html { redirect_to @item, notice: 'Message passed failed' }
+        format.html { redirect_to polymorphic_path([:items, @item.content]), notice: 'Message passed failed' }
       end
+    end
+  end
+
+  def destroy
+    @item.destroy
+    respond_to do |format|
+      format.html { redirect_to items_url }
+      format.json { head :no_content }
     end
   end
 
@@ -25,15 +35,6 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
-
-    case @item.item_type
-    when 'Adv' 
-      @adv = Adv.find(@item.item_id)
-    when 'Event'
-      @event = Event.find(@item.item_id)
-    when 'Discount'
-      @discount = Discount.find(@item.item_id)
-    end
   end
 
   def item_params
