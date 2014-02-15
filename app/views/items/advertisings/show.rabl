@@ -1,3 +1,3 @@
 object @advertising.item
-attributes :id, :content_id, :created_at, :updated_at  
+attributes :id, :content_id, :timestamp
 child(:content) { attributes :id, :description }
