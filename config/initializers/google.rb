@@ -1,3 +1,3 @@
 class Google
-  CLOUD_MESSAGING = GCM.new('AIzaSyDnEEoFJG1-K-QmV7qdkYyLHWIIqvJ5Of4')
+  CLOUD_MESSAGING = GCM.new(APP_CONFIG['android_application_id'])
 end
