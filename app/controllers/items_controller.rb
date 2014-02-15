@@ -1,8 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :send_item_id]
 
-  @@gcm = GCM.new('AIzaSyDnEEoFJG1-K-QmV7qdkYyLHWIIqvJ5Of4')
-
   def index
     @items = Item.all
   end
@@ -10,10 +8,8 @@ class ItemsController < ApplicationController
   def send_item_id
     registration_ids = User.pluck(:registration_id)
     options = {data: {score: "#{@item.id}"}, collapse_key: "updated_score"}
-    response = @@gcm.send_notification(registration_ids, options)
+    response = Google::CLOUD_MESSAGING.send_notification(registration_ids, options)
     
-    binding.pry
-
     respond_to do |format|
       if response[:status_code] == 200
         format.html { redirect_to polymorphic_path([:items, @item.content]), notice: 'Message passed success' }
