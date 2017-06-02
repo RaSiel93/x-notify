@@ -2,19 +2,19 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: xnotifyc_development
+  database:
   pool: 5
-  username: admin
-  password: password
+  username:
+  password:
   socket: /var/run/mysqld/mysqld.sock
 
 test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: xnotifyc_development
+  database:
   pool: 5
-  username: root
+  username:
   password:
   socket: /tmp/mysql.sock
 
@@ -22,7 +22,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: xnotifyc_development
+  database:
   pool: 5
-  username: xnotifyc_rasiel
-  password: 184418
+  username:
+  password:

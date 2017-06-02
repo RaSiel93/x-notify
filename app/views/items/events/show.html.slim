@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong
+  | Title:
+  = @event.item.title
+
+p
+  strong
+  | Description:
+  = @event.description
+
+= link_to 'Edit', edit_items_event_path(@event)
+= '|'
+= link_to 'Back', items_path

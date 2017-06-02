@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :find_user, :only => [:show, :edit, :update, :destroy, :show_send, :send_message]
+  before_filter :set_user, :only => [:show, :edit, :update, :destroy, :show_send, :send_message]
 
-  @@gcm = GCM.new('AIzaSyDnEEoFJG1-K-QmV7qdkYyLHWIIqvJ5Of4')
+	skip_before_filter  :verify_authenticity_token
 
   def index
     @users = User.all
@@ -73,12 +73,9 @@ class UsersController < ApplicationController
   end
 
   def send_message
-    message_text = params[:message_text]
-
-    registration_ids = [User.find(params[:id]).registration_id]
-    options = {data: {score: "#{message_text}"}, collapse_key: "updated_score"}
-    response = @@gcm.send_notification(registration_ids, options)
-
+    registration_ids = [@user.registration_id]
+    options = {data: {score: "#{params[:message_text]}"}, collapse_key: "updated_score"}
+    response = Google::CLOUD_MESSAGING.send_notification(registration_ids, options)
 
     respond_to do |format|
       if response[:status_code] == 200
@@ -92,10 +89,14 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:login, :registration_id)
+    if params[:user].nil?
+      {:login => params[:login], :registration_id => params[:registration_id]}
+    else
+      params.require(:user).permit(:login, :registration_id)
+    end
   end
 
-  def find_user
+  def set_user
     @user = User.find(params[:id])
   end
 end

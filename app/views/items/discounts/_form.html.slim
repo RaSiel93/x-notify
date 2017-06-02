@@ -1,0 +1,28 @@
+= form_for [:items, @discount] do |f|
+  - if @discount.errors.any?
+    #error_explanation
+      h2 = pluralize(@discount.errors.count, "error")
+        | prohibited this discount from being saved:
+
+      ul
+      - @discount.errors.full_messages.each do |msg|
+        li = msg
+
+  = f.fields_for :item do |f_item|
+    p
+      = f_item.label :title
+      = f_item.text_field :title
+
+    p
+      = f_item.check_box :published
+      = f_item.label :published
+
+  p
+    = f.label :amount
+    = f.text_field :amount
+
+  p
+    = f.label :description
+    = f.text_field :description
+
+  p = f.submit "Create"
